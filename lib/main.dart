@@ -11,7 +11,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
+    return GestureDetector(
+      onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: GetMaterialApp(
       title: 'news comment',
       theme: ThemeData(
         backgroundColor: Colors.white,
@@ -20,6 +24,6 @@ class MyApp extends StatelessWidget {
 
       initialRoute: Routes.INITIAL,
       getPages: AppPages.routes,
-    );
+    ));
   }
 }

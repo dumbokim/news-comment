@@ -13,7 +13,7 @@ class NewsItem extends StatelessWidget {
         Get.to(()=> NewsPage());
       },
       child: Container(
-        decoration: BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
+        decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.grey))),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
