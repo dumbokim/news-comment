@@ -11,11 +11,19 @@ class LoginPage extends GetView<MainController> {
         body: SafeArea(
             child: Container(
                 padding: const EdgeInsets.symmetric(
-                  horizontal: 20,
+                  horizontal: 40,
                 ),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    TextBlack(text:'사설 코멘트', size: 35, weight: FontWeight.w700, ),
+                      const SizedBox(
+                      height: 50,
+                    ),
+                    TextBlack(text:'로그인', size: 25, weight: FontWeight.w700, ),
+                      const SizedBox(
+                      height: 30,
+                    ),
                     TextField(
                       onChanged: (value) {
                         controller.id(value);
@@ -51,8 +59,14 @@ class LoginPage extends GetView<MainController> {
                     const SizedBox(
                       height: 30,
                     ),
-                    TextButton(
-                        onPressed: () async {
+  Container(
+
+    padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 20),
+decoration: BoxDecoration(
+borderRadius: BorderRadius.circular(10),
+  border: Border.all(color: Colors.grey)
+),
+    child: InkWell(onTap:() async {
                           Get.defaultDialog(
                               title: '',
                               content: const CircularProgressIndicator(),
@@ -66,7 +80,9 @@ class LoginPage extends GetView<MainController> {
                         },
                         child: TextBlack(
                           text: '로그인',
-                        ))
+                           size: 18, weight: FontWeight.w600, 
+                        )))
+                   
                   ],
                 ))));
   }

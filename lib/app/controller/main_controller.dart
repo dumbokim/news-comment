@@ -55,6 +55,18 @@ class MainController extends GetxController {
     }
   }
 
+  logout() async {
+      final pref = await SharedPreferences.getInstance();
+
+      await pref.setString('acsToken', '');
+
+      name('');
+
+      email('');
+
+      Get.offAllNamed(Routes.LOGIN);
+    }
+
   _tokenCheck() async {
     final result = await _repository.tokenCheck();
 

@@ -20,11 +20,32 @@ class MyPage extends GetView<MainController> {
           Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   TextBlack(
                       text: '안녕하세요, ${controller.name.value}님!',
                       size: 22,
                       weight: FontWeight.w700),
+                  InkWell(
+                      onTap: () async {
+                        Get.defaultDialog(
+                            titlePadding:
+                                const EdgeInsets.symmetric(vertical: 20),
+                            contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 20, vertical: 26),
+                            title: '로그아웃 하시겠어요?',
+                            middleText: "로그아웃을 원하시면\n\nOK를 눌러주세요\n",
+                            
+                            onConfirm: () async {
+                        await controller.logout();
+
+                            },
+                            
+                            );
+                          
+                      },
+                      child: const Icon(Icons.logout,
+                          size: 30, color: Colors.blue)),
                 ],
               )),
           Container(
