@@ -4,12 +4,13 @@ import 'package:collector_app/app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CommentItem extends GetView<NewsController> {
+class MyCommentItem extends GetView<NewsController> {
   String? comment;
-  String? name;
+  String? title;
   String? date;
 
-  CommentItem({
+  MyCommentItem({
+    this.title,
     this.comment,
     this.date,
   });
@@ -23,16 +24,18 @@ class CommentItem extends GetView<NewsController> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-            TextBlack(
-              text: '익명',
-              weight: FontWeight.w600,
-            ),
-            TextBlack(
+           TextBlack(
               text: date!.split('T')[0],
               weight: FontWeight.w400,
             ),
-          ]),
+            const SizedBox(
+            height: 8,
+          ),
+            TextBlack(
+              text: title,
+              weight: FontWeight.w600,
+            ),
+           
           const SizedBox(
             height: 12,
           ),

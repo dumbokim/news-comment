@@ -1,9 +1,13 @@
+import 'package:collector_app/app/controller/main_controller.dart';
+import 'package:collector_app/app/controller/news_controller.dart';
 import 'package:collector_app/app/ui/pages.dart';
 import 'package:collector_app/app/widget/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class CommentInputContainer extends StatelessWidget {
+class CommentInputContainer extends GetView<NewsController> {
+  final MainController mainController = Get.find<MainController>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -13,38 +17,48 @@ class CommentInputContainer extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-  TextBlack(
-                  text: '이시현',
-                  weight: FontWeight.w600,
-                ),
-                 const SizedBox(
+          TextBlack(
+            text: mainController.name.value,
+            weight: FontWeight.w600,
+          ),
+          const SizedBox(
             height: 18,
           ),
-            TextField(
-              maxLines: 5,
-              maxLength: 100,
-              decoration: InputDecoration(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                enabledBorder: OutlineInputBorder(
+          TextField(
+            onChanged: (value) {
+              controller.userComment(value);
+            },
+            maxLines: 5,
+            maxLength: 120,
+            decoration: InputDecoration(
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+              enabledBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.grey)
-                ),
-                focusedBorder: OutlineInputBorder(
+                  borderSide: const BorderSide(color: Colors.grey)),
+              focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.blueAccent)
-                ),
-              ),
+                  borderSide: const BorderSide(color: Colors.blueAccent)),
             ),
+          ),
           const SizedBox(
             height: 12,
           ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-            
+          Row(mainAxisAlignment: MainAxisAlignment.end, children: [
             BtnSm(
-            text: '입력',
-          )]),
+              text: '입력',
+              onPress: () async {
+                Get.defaultDialog(
+                    title: '',
+                    content: const CircularProgressIndicator(),
+                    backgroundColor: Colors.transparent);
+
+                await controller.applyComment();
+
+                Get.back();
+              },
+            )
+          ]),
         ],
       ),
     );
