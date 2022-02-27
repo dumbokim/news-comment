@@ -1,6 +1,8 @@
+import 'package:collector_app/app/controller/main_controller.dart';
 import 'package:collector_app/app/data/repository/main_repository.dart';
 import 'package:collector_app/app/data/repository/news_repository.dart';
 import 'package:collector_app/app/routes/route.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -9,21 +11,12 @@ class NewsController extends GetxController {
 
   @override
   void onReady() async {
-    final result = await getAllNews();
-
-    if (result == false) {
-      newsList([
-        {'no': 0, 'title': '뉴스를 불러올 수 없습니다.', 'company': '', 'data': ''}
-      ]);
-    } else {
-      newsList(result);
-    }
+    await getAllNews();
 
     super.onReady();
   }
 
-  var id = ''.obs;
-  var password = ''.obs;
+  var isLoaded = false.obs;
 
   var newsList = [].obs;
 
@@ -36,14 +29,26 @@ class NewsController extends GetxController {
   var myComments = [].obs;
 
   getAllNews() async {
+    isLoaded(false);
+
     final result = await _repository.getAllNews();
 
-    print(result);
 
-    return result;
+    if (result == false) {
+      newsList([
+        {'no': 0, 'title': '뉴스를 불러올 수 없습니다.', 'company': '', 'data': ''}
+      ]);
+    } else {
+      newsList(result);
+    }
+
+    isLoaded(true);
+
   }
 
   Future<bool> getOneNews(int no) async {
+    isLoaded(false);
+
     final result = await _repository.getOneNews(no);
 
     if (result == false) {
@@ -51,12 +56,18 @@ class NewsController extends GetxController {
     } else {
       theNews(result['news']);
       comments(result['comment']);
+      isLoaded(true);
 
       return true;
     }
   }
 
   applyComment() async {
+    Get.defaultDialog(
+      title: '코멘트 저장중..',
+      content: const CircularProgressIndicator(),
+    );
+
     final commentData = {
       'comment': userComment.value,
     };
@@ -73,6 +84,8 @@ class NewsController extends GetxController {
   }
 
   getAllComments() async {
+    isLoaded(false);
+
     final result = await _repository.getAllComments();
 
     if (result == false) {
@@ -80,6 +93,8 @@ class NewsController extends GetxController {
       print('returned well');
 
       print(result);
+
+      isLoaded(true);
 
       myComments(result);
     }

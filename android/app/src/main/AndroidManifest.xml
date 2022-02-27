@@ -1,6 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.dbk.collector">
-   <application
+    <uses-permission android:name="android.permission.INTERNET" />
+    <application
         android:label="사설코멘트"
         android:icon="@mipmap/ic_launcher">
         <activity

@@ -7,7 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class MainApi {
   final Dio _dio = Get.find<Dio>();
 
-  login(data) async {
+  login(Map<String, String> data) async {
     try {
       final response = await _dio.post('auth/login', data: data);
 

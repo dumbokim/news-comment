@@ -4,7 +4,7 @@ import 'package:get/get.dart';
 class MainRepository {
   final MainApi _api = Get.find<MainApi>();
 
-  login(data) async {
+  login(Map<String, String> data) async {
     return await _api.login(data);
   }
 

@@ -8,12 +8,26 @@ class SplashPage extends GetView<MainController> {
   Widget build(BuildContext context) {
     return Scaffold(
         body: SafeArea(
-            child: 
-            Center(child: TextBlack(
-              text: '사설 코멘트',
-              size: 33,
-              weight: FontWeight.w700,
-            ),)
-            ));
+            child: Center(child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+          TextBlack(
+            text: '사설 코멘트',
+            size: 33,
+            weight: FontWeight.w700,
+          ),
+          const SizedBox(
+            height: 70,
+          ),
+          const CircularProgressIndicator(),
+          const SizedBox(
+            height: 40,
+          ),
+          Obx(() => TextBlack(
+                text: controller.loadingText.value,
+                size: 18,
+                weight: FontWeight.w400,
+              )),
+        ]))));
   }
 }

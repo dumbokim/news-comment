@@ -62,7 +62,7 @@ class CommentPage extends GetView<NewsController> {
                           return CommentItem(
                             comment: '${controller.comments[index]['comment']}',
                               date:
-                                  '${controller.myComments[index]['date']}'
+                                  '${controller.comments[index]['date']}'
                           );
                         })),
                     CommentInputContainer(),

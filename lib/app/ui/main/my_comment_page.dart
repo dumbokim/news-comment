@@ -17,7 +17,10 @@ class MyCommentPage extends GetView<NewsController> {
           centerTitle: true,
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
+          child: Obx(() => IndexedStack(
+                    index: controller.isLoaded.value ? 0 : 1,
+                    children: [
+                      SingleChildScrollView(
             child: Container(
                 padding: const EdgeInsets.only(top: 12, bottom: 20),
                 child: Column(children: [
@@ -42,6 +45,7 @@ class MyCommentPage extends GetView<NewsController> {
                       })),
                 ])),
           ),
+        const Center(child: CircularProgressIndicator())  ]))
         ));
   }
 }

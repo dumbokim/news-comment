@@ -54,9 +54,11 @@ class MyPage extends GetView<MainController> {
           ),
           InkWell(
               onTap: () async {
-                final result = await newsController.getAllComments();
 
                 Get.to(() => MyCommentPage());
+
+                final result = await newsController.getAllComments();
+
               },
               child: Container(
                   decoration: const BoxDecoration(

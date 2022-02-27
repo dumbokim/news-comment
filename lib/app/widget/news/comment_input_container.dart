@@ -48,10 +48,7 @@ class CommentInputContainer extends GetView<NewsController> {
             BtnSm(
               text: '입력',
               onPress: () async {
-                Get.defaultDialog(
-                    title: '',
-                    content: const CircularProgressIndicator(),
-                    backgroundColor: Colors.transparent);
+               
 
                 await controller.applyComment();
 

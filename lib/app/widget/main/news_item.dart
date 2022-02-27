@@ -16,9 +16,9 @@ class NewsItem extends GetView<NewsController> {
   Widget build(BuildContext context) {
     return InkWell(
         onTap: () async {
-          final result = await controller.getOneNews(no!);
+          Get.to(() => NewsPage());
 
-          result? Get.to(() => NewsPage()) : '';
+          final result = await controller.getOneNews(no!);
         },
         child: Container(
           decoration: const BoxDecoration(
